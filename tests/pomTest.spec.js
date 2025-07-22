@@ -22,7 +22,7 @@ test("test", async ({ page }) => {
   );
 
   const searcPage = new SearchPage(page);
-  await searcPage.search.click();
+  await searcPage.searches.click();
   await expect(searcPage.ticketType).toHaveText("Oneway");
   await expect(searcPage.date).toHaveText("30-08-2025");
   await expect(searcPage.adultTravellers).toHaveText("2");
