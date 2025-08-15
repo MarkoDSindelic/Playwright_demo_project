@@ -10,8 +10,9 @@ test("test", async ({ page }) => {
   await homePage.date.fill("");
   await homePage.date.fill("30-08-2025");
   await homePage.date.click();
-  await homePage.travallersInput.click();
-  await homePage.addTravallerButton.click();
+  await homePage.travellersInput.click();
+  await homePage.addTravellerButton.waitFor({ state: "visible" });
+  await homePage.addTravellerButton.click();
 
   await expect(homePage.ticketType).toHaveValue("oneway");
 
@@ -21,11 +22,11 @@ test("test", async ({ page }) => {
     "https://phptravels.net/flights/lon/ber/oneway/economy/30-08-2025/2/0/0"
   );
 
-  const searcPage = new SearchPage(page);
-  await searcPage.search.click();
-  await expect(searcPage.ticketType).toHaveText("Oneway");
-  await expect(searcPage.date).toHaveText("30-08-2025");
-  await expect(searcPage.adultTravellers).toHaveText("2");
-  await expect(searcPage.fromTo).toContainText("lon");
-  await expect(searcPage.fromTo).toContainText("ber");
+  const searchPage = new SearchPage(page);
+  await searchPage.searches.click();
+  await expect(searchPage.ticketType).toHaveText("Oneway");
+  await expect(searchPage.date).toHaveText("30-08-2025");
+  await expect(searchPage.adultTravellers).toContainText("2 Adults");
+  await expect(searchPage.from).toContainText("LON");
+  await expect(searchPage.to).toContainText("BER");
 });
