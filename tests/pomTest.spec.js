@@ -11,7 +11,7 @@ test("test", async ({ page }) => {
   await homePage.date.fill("30-08-2025");
   await homePage.date.click();
   await homePage.travellersInput.click();
-  await page.waitForTimeout(2000);
+  await homePage.addTravellerButton.waitFor({ state: "visible" });
   await homePage.addTravellerButton.click();
 
   await expect(homePage.ticketType).toHaveValue("oneway");
@@ -27,6 +27,6 @@ test("test", async ({ page }) => {
   await expect(searchPage.ticketType).toHaveText("Oneway");
   await expect(searchPage.date).toHaveText("30-08-2025");
   await expect(searchPage.adultTravellers).toContainText("2 Adults");
-  await expect(searchPage.fromTo).toContainText("lon");
-  await expect(searchPage.fromTo).toContainText("ber");
+  await expect(searchPage.from).toContainText("LON");
+  await expect(searchPage.to).toContainText("BER");
 });
